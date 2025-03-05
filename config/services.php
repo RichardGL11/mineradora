@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'abacatePay'=> [
+        'key'=> env('ABACATE_PAY_KEY'),
+        'url' => env('ABACATE_PAY_PIX'),
+    ]
+
 ];

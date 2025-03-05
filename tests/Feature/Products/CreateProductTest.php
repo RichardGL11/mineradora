@@ -30,3 +30,4 @@ $image =  UploadedFile::fake()->image('image.jpg',100,100);
  ]);
 
 });
+
