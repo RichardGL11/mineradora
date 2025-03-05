@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Descrição do Projeto:
+1. Objetivo Geral
+   Desenvolver um aplicativo para gerenciar tanto a venda de produtos da A S.OS Areia e Brita quanto a logística de entrega, conectando clientes, administrador da plataforma e caçambeiros. O sistema permitirá que os clientes realizem pedidos diretamente no app, o administrador gere solicitações de frete, e os caçambeiros aceitem e realizem as entregas. O sistema contará com geolocalização para exibição da rota do frete e integração com meios de pagamento para processamento das compras e resgates de créditos.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+2. Fluxo Operacional
+   2.1 O cliente da mineradora seleciona e compra um produto diretamente pelo aplicativo.
+   2.2 O pagamento é processado pelo sistema através das integrações disponíveis.
+   2.3 O administrador da plataforma recebe a solicitação de compra e gera um frete vinculado ao pedido.
+   2.4 O sistema disponibiliza o frete para os caçambeiros cadastrados, que podem aceitar ou recusar.
+   2.5 O primeiro caçambeiro a aceitar fica responsável pela entrega.
+   2.6 O sistema exibe a rota da entrega via geolocalização, informando ao caçambeiro e ao cliente o status do transporte.
+   2.7 A entrega é realizada, e o caçambeiro confirma a finalização da corrida.
+   2.8 Após a entrega, o caçambeiro recebe um crédito na plataforma.
+   2.9 O crédito pode ser utilizado de duas formas:
+   2.9.1 Compra de produtos na mineradora.
+   2.9.2 Resgate financeiro via PIX, débito ou outra forma definida.
+   2.10 O administrador tem acesso a um painel de métricas e movimentação, permitindo a análise dos dados com filtros por dia, semana e mês.
+   2.11 O sistema pode ser integrado ao banco de dados da empresa para sincronização de informações.
 
-## About Laravel
+3. Entidades do Sistema
+   Clientes: Usuários que compram produtos e solicitam fretes.
+   Caçambeiros: Profissionais cadastrados para realizar entregas.
+   Administrador: Responsável por gerenciar pedidos e fretes.
+   Produtos: Itens vendidos pela mineradora dentro do aplicativo.
+   Fretes: Solicitações de transporte criadas automaticamente após a venda.
+   Pagamentos: Transações processadas dentro do app.
+   Créditos: Valores recebidos pelos caçambeiros pelas entregas realizadas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+4. Requisitos Funcionais
+   4.1 Cadastro e Gerenciamento de Usuários
+   Clientes podem criar contas e realizar pedidos.
+   Caçambeiros podem se cadastrar para receber e aceitar fretes.
+   O sistema terá uma copy persuasiva para incentivar caçambeiros a realizarem o cadastro na tela inicial.
+   4.2 Venda de Produtos
+   Listagem de produtos com preços e disponibilidade.
+   Opção de adicionar produtos ao carrinho e finalizar a compra.
+   Pagamento realizado diretamente pelo aplicativo.
+   4.3 Gestão de Fretes
+   O administrador gera solicitações de frete vinculadas às compras.
+   Os caçambeiros recebem as solicitações e podem aceitar ou recusar.
+   O primeiro caçambeiro a aceitar garante o serviço.
+   O sistema exibe a rota da entrega via geolocalização, permitindo ao caçambeiro e ao cliente acompanhar o trajeto.
+   4.4 Registro de Entrega
+   O sistema registra a entrega do produto.
+   O status da entrega é atualizado em tempo real no app.
+   4.5 Créditos e Resgates
+   O caçambeiro recebe créditos ao concluir as entregas.
+   Os créditos podem ser usados para compras na mineradora ou convertidos em dinheiro via PIX/débito.
+   4.6 Painel Administrativo
+   Relatórios de movimentação financeira do app.
+   Filtros por dia, semana e mês.
+   Controle de créditos e resgates dos caçambeiros.
+   Integração opcional com o banco de dados da empresa.
+   4.7 Estratégias de Engajamento
+   Sistema de premiação: O app terá um sistema de bonificação por metas para incentivar a produtividade dos caçambeiros.
+   Link com redes sociais: O app terá integração com as redes sociais da empresa.
+   4.8 Integração com Meios de Pagamento
+   O sistema terá suporte para pagamentos via Bradesco e Caixa Econômica.
+   Caso essas integrações não sejam viáveis, será usada uma API de terceiros (exemplo: PagSeguro).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Requisitos Não-Funcionais
+   Segurança: Proteção de dados e transações financeiras.
+   Escalabilidade: Suporte para crescimento do número de usuários e movimentações.
+   Usabilidade: Interface intuitiva para clientes, caçambeiros e administradores.
+   Notificações em Tempo Real: Aviso de novas solicitações para os caçambeiros.
