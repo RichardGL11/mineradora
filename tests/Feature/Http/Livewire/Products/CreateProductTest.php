@@ -21,6 +21,14 @@ $image =  UploadedFile::fake()->image('image.jpg',100,100);
      ->set('price', '100.00')
      ->assertSet('price', '100.00')
      ->set('image',$image)
+     ->set('weight',10.5)
+     ->assertset('weight',10.5)
+     ->set('height',6.00)
+     ->assertSet('height',6.00)
+     ->set('length',30.00)
+     ->assertSet('length',30.00)
+     ->set('width',15.50)
+     ->assertSet('width',15.50)
      ->call('save')
      ->assertHasNoErrors();
 
@@ -29,6 +37,10 @@ $image =  UploadedFile::fake()->image('image.jpg',100,100);
      'name'         => 'product',
      'description'  => 'description',
      'price'        => 100,
+     'height'       => 6.00,
+     'length'       => 30,
+     'weight'       => 10.5,
+     'width'        => 15.5,
  ]);
 
 });
@@ -103,4 +115,84 @@ describe('validation tests', function () {
         'file'       => ['file', 'notafile'],
         'mimes'      => ['mimes','something.svg'],
     ]);
+    test('height field', function ($rule,$value){
+        $image =  UploadedFile::fake()->image('image.jpg',100,100);
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateProduct::class)
+            ->set('name','name')
+            ->assertSet('name','name')
+            ->set('description','description')
+            ->assertSet('description','description')
+            ->set('price', 100)
+            ->set('image',$image)
+            ->set('height',$value)
+            ->call('save')
+            ->assertHasErrors(['height' => $rule]);
+    })->with([
+        'required'          => ['required', ''],
+        'numeric'           => ['numeric','aa'],
+        'greater than 0'    => ['gt:0',-1],
+    ]);
+    test('length field', function ($rule,$value){
+        $image =  UploadedFile::fake()->image('image.jpg',100,100);
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateProduct::class)
+            ->set('name','name')
+            ->assertSet('name','name')
+            ->set('description','description')
+            ->assertSet('description','description')
+            ->set('price', 100)
+            ->set('image',$image)
+            ->set('height',50)
+            ->set('length',$value)
+            ->call('save')
+            ->assertHasErrors(['length' => $rule]);
+    })->with([
+        'required'          => ['required', ''],
+        'numeric'           => ['numeric','aa'],
+        'greater than 0'    => ['gt:0',-1],
+    ]);
+
+    test('Width field', function ($rule,$value){
+        $image =  UploadedFile::fake()->image('image.jpg',100,100);
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateProduct::class)
+            ->set('name','name')
+            ->assertSet('name','name')
+            ->set('description','description')
+            ->assertSet('description','description')
+            ->set('price', 100)
+            ->set('image',$image)
+            ->set('height',50)
+            ->set('length',198)
+            ->set('width',$value)
+            ->call('save')
+            ->assertHasErrors(['width' => $rule]);
+    })->with([
+        'required'          => ['required', ''],
+        'numeric'           => ['numeric','aa'],
+        'greater than 0'    => ['gt:0',-1],
+    ]);
+test('weight field', function ($rule,$value){
+        $image =  UploadedFile::fake()->image('image.jpg',100,100);
+        Livewire::actingAs(User::factory()->create())
+            ->test(CreateProduct::class)
+            ->set('name','name')
+            ->assertSet('name','name')
+            ->set('description','description')
+            ->assertSet('description','description')
+            ->set('price', 100)
+            ->set('image',$image)
+            ->set('height',50)
+            ->set('length',198)
+            ->set('width',100)
+            ->set('weight',$value)
+            ->call('save')
+            ->assertHasErrors(['weight' => $rule]);
+    })->with([
+        'required'          => ['required', ''],
+        'numeric'           => ['numeric','aa'],
+        'greater than 0'    => ['gt:0',-1],
+    ]);
+
 });

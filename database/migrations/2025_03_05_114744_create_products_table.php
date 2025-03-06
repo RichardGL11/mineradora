@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->text('name');
             $table->text('description');
+            $table->float('width');
+            $table->float('height');
+            $table->float('length');
+            $table->float('weight');
             $table->decimal('price');
             $table->string('image')->nullable();
             $table->timestamps();
