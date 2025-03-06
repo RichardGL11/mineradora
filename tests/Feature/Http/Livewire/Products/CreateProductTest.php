@@ -1,7 +1,9 @@
 <?php
 
 use App\Livewire\Product\CreateProduct;
+use App\Services\Fretes\Facades\MelhorEnvioFacade;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 use App\Models\User;
 use App\Models\Product;
@@ -101,4 +103,59 @@ describe('validation tests', function () {
         'file'       => ['file', 'notafile'],
         'mimes'      => ['mimes','something.svg'],
     ]);
+});
+
+
+test('fake test', function () {
+
+
+//    MelhorEnvioFacade::setPostalCodes('96020360','01018020')
+//        ->setProduct(Product::factory(10)->create(['price' => 5]))
+//        ->generateFrete()
+//    ;
+
+   $http =  \Illuminate\Support\Facades\Http::withHeaders([
+        'Content-Type'       => 'application/json',
+        'Accept'             => 'application/json',
+        'Authorization'      => 'Bearer '.env('MELHOR_ENVIO_KEY'),
+        'User-Agent'         => env('MELHOR_ENVIO_USER_AGENT')
+    ])
+    ->post('https://www.melhorenvio.com.br/api/v2/me/shipment/calculate',[
+            "from" => [
+                "postal_code" => "96020360"
+            ],
+            "to" => [
+                "postal_code" => "01018020"
+            ],
+            "products" => [
+                [
+                    "id" => "1",
+                    "width" => 11,
+                    "height" => 17,
+                    "length" => 11,
+                    "weight" => 0.3,
+                    "insurance_value" => 10.1,
+                    "quantity" => 1
+                ],
+                [
+                    "id" => "2",
+                    "width" => 16,
+                    "height" => 25,
+                    "length" => 11,
+                    "weight" => 0.3,
+                    "insurance_value" => 55.05,
+                    "quantity" => 2
+                ],
+                [
+                    "id" => "3",
+                    "width" => 22,
+                    "height" => 30,
+                    "length" => 11,
+                    "weight" => 1,
+                    "insurance_value" => 30,
+                    "quantity" => 1
+                ]
+            ]
+        ])->json();
+   dd($http);
 });
