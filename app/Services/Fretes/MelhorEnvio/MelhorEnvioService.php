@@ -44,10 +44,10 @@ class MelhorEnvioService implements MelhorEnvioInterface
         $this->products->each(function ($product) use (&$productDetails) {
             $productDetails[] = [
                 "id" => $product->id,
-                "width" => 11,
-                "height" => 17,
-                "length" => 11,
-                "weight" => 0.3,
+                "width" => $product->width,
+                "height" => $product->height,
+                "length" => $product->length,
+                "weight" => $product->weight,
                 "insurance_value" => $product->price,
                 "quantity" => 2
             ];
