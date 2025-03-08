@@ -5,8 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Product;
 use App\Services\PaymentGateway\Facades\AbacatePayFacade;
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Collection;
-use function Pest\Laravel\json;
 
 class GeneratePaymentCommand extends Command
 {
