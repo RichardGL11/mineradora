@@ -18,29 +18,28 @@ class AbacatePayService implements PaymentGatewayInterface
         $this->http = Http::withToken(config('services.abacatePay.key'));
     }
 
-    public function generatePix():void
+    public function generatePix()
     {
-       $this->http
+        $http = $this->http
            ->post(config('services.abacatePay.url'),
                $this->generatePixBody()
-           )->json();
+           );
+        return $http;
     }
 
     public function generatePixBody(): array
     {
         $productDetails = [];
-
         $this->products->each(function($product) use (&$productDetails) {
             $productDetails[] = [
                 'externalId' => $product->id,
                 'name' => $product->name,
                 'description' => $product->description,
                 'quantity' => $product->quantity,
-                'price' => $product->price,
+                'price' => (int)$product->price,
             ];
 
         });
-
         return [
             'frequency' => 'ONE_TIME',
             'methods' => ['PIX'],
@@ -59,6 +58,7 @@ class AbacatePayService implements PaymentGatewayInterface
     public function setProduct(Collection|Product $product):self
     {
         $this->products = $product;
+
         return $this;
     }
 

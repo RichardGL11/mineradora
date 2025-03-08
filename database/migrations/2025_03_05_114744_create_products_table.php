@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('weight');
             $table->decimal('price');
             $table->string('image')->nullable();
+            $table->integer('quantity')->default(0);
             $table->timestamps();
         });
     }

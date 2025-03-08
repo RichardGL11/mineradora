@@ -34,6 +34,14 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('shopping-cart')" :active="request()->routeIs('shopping-cart')" wire:navigate>
+                        {{ __('ShoppingCart') }}
+                        @if(request()->getRequestUri() != '/shopping-cart')
+                            <livewire:shopping-cart.shopping-cart />
+                        @endif
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

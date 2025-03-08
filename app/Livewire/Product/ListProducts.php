@@ -16,6 +16,11 @@ class ListProducts extends Component
         return Product::all();
     }
 
+    public function Cart(Product $product):void
+    {
+        $this->dispatch('addToCart', ['product' => $product]);
+
+    }
     #[Layout('layouts.app')]
     public function render()
     {
