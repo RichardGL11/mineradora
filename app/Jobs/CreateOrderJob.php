@@ -17,7 +17,6 @@ class CreateOrderJob implements ShouldQueue
      */
     public function __construct(private readonly Collection|Product $product, private readonly int $amount)
     {
-        $this->handle();
     }
 
     /**

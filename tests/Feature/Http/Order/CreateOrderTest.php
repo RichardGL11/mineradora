@@ -2,17 +2,14 @@
 
 use App\Console\Commands\GeneratePaymentCommand;
 use App\Enums\OrderStatus;
-use App\Jobs\CreateOrderJob;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Queue;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 
 it('should be able to create an order', function () {
-    Queue::fake(CreateOrderJob::class);
     Http::fake([
         config('services.abacatePay.url') => Http::response([
             "error" => null,
@@ -44,9 +41,6 @@ it('should be able to create an order', function () {
     $product = \App\Models\Product::factory(10)->create();
     app(GeneratePaymentCommand::class)->handle($product);
 
-    Queue::assertPushed(CreateOrderJob::class);
-    Queue::shouldFakeJob((object)CreateOrderJob::class);
-
     assertDatabaseCount(Order::class, 1);
     assertDatabaseHas(Order::class, [
        'user_id' => Auth::id(),
@@ -63,6 +57,5 @@ it('should be able to create an order', function () {
             'quantity'   => $product->quantity
         ]);
     });
-
-
 });
+
