@@ -72,3 +72,23 @@ test('Only the user can see their shopping Cart',function() {
     $livewire2->assertDontSee($product2->description);
 
 });
+
+test('calculates the total of the shopping cart products', function () {
+    $product1 =\App\Models\Product::factory()->create();
+    $product2 =\App\Models\Product::factory()->create();
+
+    $livewire = Livewire::actingAs(\App\Models\User::factory()->create())
+        ->test(ShoppingCart::class)
+        ->call('addToCart', $product1)
+        ->call('addToCart', $product2);
+
+    $livewire->assertSee($product1->name);
+    $livewire->assertSee($product1->price);
+    $livewire->assertSee($product1->description);
+    $livewire->assertSee($product2->name);
+    $livewire->assertSee($product2->price);
+    $livewire->assertSee($product2->description);
+
+    $total = ($product1->price * $product1->quantity) + ($product2->price * $product2->quantity);
+    $livewire->assertSee($total);
+});
