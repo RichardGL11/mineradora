@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CreateOrderJob;
 use App\Models\Product;
 use App\Services\PaymentGateway\Facades\AbacatePayFacade;
 use Illuminate\Console\Command;
@@ -31,6 +32,7 @@ class GeneratePaymentCommand extends Command
             ->generatePix();
 
       if($http->json('error') === null){
+          CreateOrderJob::dispatch($products, $http['data']['amount']);
           $url = $http['data']['url'];
           return redirect((string)$url);
       }

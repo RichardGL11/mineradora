@@ -20,7 +20,7 @@ Route::get('/shopping-cart', ShoppingCart::class)
 Route::get('/rota', ShoppingCart::class)
     ->middleware(['auth'])
     ->name('rota');
-Route::get('/deucerto', ShoppingCart::class)
+Route::get('/deucerto',ShoppingCart::class)
     ->middleware(['auth'])
     ->name('deucerto');
 
