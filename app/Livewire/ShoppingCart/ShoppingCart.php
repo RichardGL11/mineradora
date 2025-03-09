@@ -20,7 +20,7 @@ class ShoppingCart extends Component
     public function mount():void
     {
 
-       if(request()->getRequestUri() != '/dashboard'){
+       if(request()->getRequestUri() == '/shopping-cart'){
             $this->show = true;
        }
         $this->shoppingCart = Session::get('shoppingCart_'. Auth::id(),[]);
