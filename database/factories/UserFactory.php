@@ -27,6 +27,8 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'cpf' => $this->getCPF(),
+            'phone' => $this->getPhone(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
@@ -40,5 +42,16 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+    public function getCPF()
+    {
+        $this->fakerBr = \Faker\Factory::create('pt_br');
+        return $this->fakerBr->cpf();
+    }
+
+    public function getPhone()
+    {
+        $this->fakerBr = \Faker\Factory::create('pt_br');
+        return $this->fakerBr->phoneNumber();
     }
 }
