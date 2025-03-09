@@ -53,7 +53,7 @@ it('should be able to create an order', function () {
     $product->each(function ($product) {
         assertDatabaseHas('order_product',[
             'product_id' => $product->id,
-            'order_id'   => 1,
+            'order_id'   => 'bill_6xEyXSA5aKk23XkZrYNPyTze',
             'quantity'   => $product->quantity
         ]);
     });

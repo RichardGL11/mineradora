@@ -15,7 +15,7 @@ class CreateOrderJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(private readonly Collection|Product $product, private readonly int $amount)
+    public function __construct(private readonly Collection|Product $product, private readonly int $amount,private readonly string $id)
     {
     }
 
@@ -24,6 +24,6 @@ class CreateOrderJob implements ShouldQueue
      */
     public function handle(): void
     {
-        CreateOrderAction::execute($this->product, $this->amount);
+        CreateOrderAction::execute($this->product, $this->amount,$this->id);
     }
 }

@@ -32,7 +32,7 @@ class GeneratePaymentCommand extends Command
             ->generatePix();
 
       if($http->json('error') === null){
-          CreateOrderJob::dispatch($products, $http['data']['amount']);
+          CreateOrderJob::dispatch($products, $http['data']['amount'], $http['data']['id']);
           $url = $http['data']['url'];
           return redirect((string)$url);
       }
