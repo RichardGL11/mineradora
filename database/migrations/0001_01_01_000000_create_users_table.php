@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('cpf')->unique();
             $table->string('phone')->unique();
             $table->string('email')->unique();
+            $table->string('user_type')->default(\App\Enums\UserType::USER->value);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
