@@ -7,18 +7,20 @@ use function Pest\Laravel\actingAs;
 it('should add a product to the shopping cart',function() {
     $product1 =\App\Models\Product::factory()->create();
     $product2 =\App\Models\Product::factory()->create();
-
    $livewire = Livewire::actingAs(\App\Models\User::factory()->create())
     ->test(ShoppingCart::class)
     ->call('addToCart', $product1)
     ->call('addToCart', $product2);
 
-   $livewire->assertSee($product1->name);
-   $livewire->assertSee($product1->price);
-   $livewire->assertSee($product1->description);
-   $livewire->assertSee($product2->name);
-   $livewire->assertSee($product2->price);
-   $livewire->assertSee($product2->description);
+    $request = \Pest\Laravel\get('/shopping-cart');
+
+
+   $request->assertSee($product1->name);
+   $request->assertSee($product1->price);
+   $request->assertSee($product1->description);
+   $request->assertSee($product2->name);
+   $request->assertSee($product2->price);
+   $request->assertSee($product2->description);
 
 });
 
@@ -30,13 +32,14 @@ it('should remove a product to the shopping cart',function() {
     ->test(ShoppingCart::class)
     ->call('addToCart', $product1)
     ->call('addToCart', $product2);
+    $request = \Pest\Laravel\get('/shopping-cart');
 
-   $livewire->assertSee($product1->name);
-   $livewire->assertSee($product1->price);
-   $livewire->assertSee($product1->description);
-   $livewire->assertSee($product2->name);
-   $livewire->assertSee($product2->price);
-   $livewire->assertSee($product2->description);
+    $request->assertSee($product1->name);
+    $request->assertSee($product1->price);
+    $request->assertSee($product1->description);
+    $request->assertSee($product2->name);
+    $request->assertSee($product2->price);
+    $request->assertSee($product2->description);
 
    $livewire->call('removeFromCart', $product1->id);
    $livewire->assertdontsee($product1->name);
@@ -53,13 +56,15 @@ test('Only the user can see their shopping Cart',function() {
    $livewire = Livewire::test(ShoppingCart::class)
     ->call('addToCart', $product1)
     ->call('addToCart', $product2);
+    $request = \Pest\Laravel\get('/shopping-cart');
 
-   $livewire->assertSee($product1->name);
-   $livewire->assertSee($product1->price);
-   $livewire->assertSee($product1->description);
-   $livewire->assertSee($product2->name);
-   $livewire->assertSee($product2->price);
-   $livewire->assertSee($product2->description);
+
+    $request->assertSee($product1->name);
+    $request->assertSee($product1->price);
+    $request->assertSee($product1->description);
+    $request->assertSee($product2->name);
+    $request->assertSee($product2->price);
+    $request->assertSee($product2->description);
 
     $livewire2 = Livewire::actingAs($user2)
                 ->test(ShoppingCart::class);
@@ -81,14 +86,16 @@ test('calculates the total of the shopping cart products', function () {
         ->test(ShoppingCart::class)
         ->call('addToCart', $product1)
         ->call('addToCart', $product2);
+    $request = \Pest\Laravel\get('/shopping-cart');
 
-    $livewire->assertSee($product1->name);
-    $livewire->assertSee($product1->price);
-    $livewire->assertSee($product1->description);
-    $livewire->assertSee($product2->name);
-    $livewire->assertSee($product2->price);
-    $livewire->assertSee($product2->description);
+
+    $request->assertSee($product1->name);
+    $request->assertSee($product1->price);
+    $request->assertSee($product1->description);
+    $request->assertSee($product2->name);
+    $request->assertSee($product2->price);
+    $request->assertSee($product2->description);
 
     $total = ($product1->price + $product2->price);
-    $livewire->assertSee($total);
+    $request->assertSee($total);
 });
