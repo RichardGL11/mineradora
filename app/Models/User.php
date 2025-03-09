@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasmany(Order::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->user_type === UserType::ADMIN;
+    }
 }

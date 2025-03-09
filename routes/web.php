@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Livewire\Admin\Orders\ListOrders;
 use App\Livewire\ShoppingCart\ShoppingCart;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +25,8 @@ Route::get('/rota', ShoppingCart::class)
 Route::get('/deucerto',ShoppingCart::class)
     ->middleware(['auth'])
     ->name('deucerto');
+
+
+Route::get('/Orders', ListOrders::class)->middleware(AdminMiddleware::class)->name('orders.list.admin');
 
 require __DIR__.'/auth.php';

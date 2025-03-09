@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'cpf' => $this->getCPF(),
             'phone' => $this->getPhone(),
+            'user_type' => UserType::USER->value,
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
