@@ -27,6 +27,6 @@ Route::get('/deucerto',ShoppingCart::class)
     ->name('deucerto');
 
 
-Route::get('/Orders', ListOrders::class)->middleware(AdminMiddleware::class)->name('orders.list.admin');
+Route::get('/orders', ListOrders::class)->middleware(AdminMiddleware::class)->name('orders.list.admin');
 
 require __DIR__.'/auth.php';
