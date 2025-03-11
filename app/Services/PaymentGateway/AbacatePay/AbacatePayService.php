@@ -36,7 +36,7 @@ class AbacatePayService implements PaymentGatewayInterface
                 'name' => $product->name,
                 'description' => $product->description,
                 'quantity' => $product->quantity,
-                'price' => (int)$product->price,
+                'price' => (int)$product->price * 100,
             ];
 
         });
