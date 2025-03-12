@@ -49,7 +49,7 @@ class MelhorEnvioService implements MelhorEnvioInterface
                 "length" => $product->length,
                 "weight" => $product->weight,
                 "insurance_value" => $product->price,
-                "quantity" => 2
+                "quantity" => $product->pivot->quantity,
             ];
         });
 

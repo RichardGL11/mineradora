@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Orders;
 
+use App\Console\Commands\GenerateFreteCommand;
 use App\Models\Order;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -9,6 +10,11 @@ use Livewire\Component;
 class ShowOrder extends Component
 {
     public Order $order;
+
+    public function generateFrete()
+    {
+        app(GenerateFreteCommand::class)->handle($this->order->products);
+    }
 
     public function mount(Order $order):void
     {
