@@ -20,12 +20,18 @@ Route::get('/shopping-cart', ShoppingCart::class)
     ->middleware(['auth'])
     ->name('shopping-cart');
 
+
 Route::get('/rota', ShoppingCart::class)
     ->middleware(['auth'])
     ->name('rota');
 Route::get('/deucerto',ShoppingCart::class)
     ->middleware(['auth'])
     ->name('deucerto');
+
+
+Route::get('/my-orders', \App\Livewire\Orders\ListOrders::class)
+    ->middleware(['auth'])
+    ->name('show.my.orders');
 
 
 Route::get('/orders', ListOrders::class)->middleware([AdminMiddleware::class,'auth'])->name('orders.list.admin');
