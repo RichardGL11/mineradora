@@ -31,7 +31,11 @@ Route::get('/deucerto',ShoppingCart::class)
 
 Route::get('/my-orders', \App\Livewire\Orders\ListOrders::class)
     ->middleware(['auth'])
-    ->name('show.my.orders');
+    ->name('list.my.orders');
+
+Route::get('/my-orders/{order}', \App\Livewire\Orders\ListOrders::class)
+    ->middleware(['auth'])
+    ->name('show.my.order');
 
 
 Route::get('/orders', ListOrders::class)->middleware([AdminMiddleware::class,'auth'])->name('orders.list.admin');
