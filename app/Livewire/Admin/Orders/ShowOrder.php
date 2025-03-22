@@ -11,11 +11,6 @@ class ShowOrder extends Component
 {
     public Order $order;
 
-    public function generateFrete()
-    {
-        app(GenerateFreteCommand::class)->handle($this->order->products);
-    }
-
     public function mount(Order $order):void
     {
         $this->order = $order->load('user')->load('products');

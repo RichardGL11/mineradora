@@ -42,6 +42,9 @@ return [
 
     'melhorEnvio' =>[
         'key' => env('MELHOR_ENVIO_KEY'),
+    ],
+    'googleMaps' => [
+        'key' => env('GOOGLE_API_KEY'),
     ]
 
 ];

@@ -62,7 +62,7 @@
         @if($order->status === \App\Enums\OrderStatus::PAYED)
         <div class="flex items-center justify-end mt-6">
 
-            <a wire:click="generateFrete()" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+            <a href="{{route('frete.create.admin',$order)}}" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
                 <button>
                     Generate Frete
                 </button>

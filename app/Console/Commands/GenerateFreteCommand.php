@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Product;
 use App\Services\Fretes\Facades\MelhorEnvioFacade;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class GenerateFreteCommand extends Command
@@ -26,11 +27,14 @@ class GenerateFreteCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(Collection|Product $products)
+    public function handle(Collection|Product $products):Collection
     {
-      $http =   MelhorEnvioFacade::setProduct($products)
+      $http = MelhorEnvioFacade::setProduct($products)
                 ->setPostalCodes('09270470','09581420')
                 ->generateFrete();
-        dd($http);
+
+     return collect($http)->filter(function ($http) {
+         return !Arr::has($http, 'error');
+     });
     }
 }
