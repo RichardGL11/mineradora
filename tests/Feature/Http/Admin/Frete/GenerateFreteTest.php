@@ -1,12 +1,15 @@
 <?php
 
+use App\Enums\FreightStatus;
 use App\Livewire\Admin\Frete\GenerateFrete;
-use App\Livewire\Admin\Orders\ShowOrder;
 use App\Models\Freight;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 use App\Models\Order;
 use App\Models\Product;
+use function Pest\Laravel\assertDatabaseCount;
+use function Pest\Laravel\assertDatabaseHas;
+
 beforeEach(function () {
     Http::fake([
         'https://www.melhorenvio.com.br/api/v2/me/shipment/calculate' => Http::response([
@@ -99,11 +102,11 @@ it('should be able to create a Freight for a Order', function () {
     $livewire->assertSee('Price With Discount R$:0.00');
     $livewire->call('createFreteOrder','180.86');
 
-    \Pest\Laravel\assertDatabaseCount(\App\Models\Freight::class, 1);
-    \Pest\Laravel\assertDatabaseHas(Freight::class, [
+    assertDatabaseCount(Freight::class, 1);
+    assertDatabaseHas(Freight::class, [
         'user_id'        => $user->id,
         'order_id'       => $order->id,
-        'status'         => \App\Enums\FreightStatus::TRANSIT,
+        'status'         => FreightStatus::TRANSIT,
         'price'          => '180.86',
         'products_price' =>$order->total
     ]);
