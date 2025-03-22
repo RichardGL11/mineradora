@@ -5,6 +5,9 @@ namespace App\Livewire\Admin\Frete;
 use App\Actions\CreateFreightAction;
 use App\Console\Commands\GenerateFreteCommand;
 use App\Models\Order;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -15,7 +18,7 @@ class GenerateFrete extends Component
     public Order $order;
     public Collection|null $fretes = null;
 
-    public function generateFrete()
+    public function generateFrete():void
     {
         $fretes = app(GenerateFreteCommand::class)->handle($this->order->products);
         $this->fretes = $fretes;
@@ -29,7 +32,7 @@ class GenerateFrete extends Component
 
     #[On('reload')]
     #[Layout('layouts.app')]
-    public function render()
+    public function render():View
     {
         return view('livewire.admin.frete.generate-frete');
     }
