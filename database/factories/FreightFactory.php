@@ -32,7 +32,7 @@ class FreightFactory extends Factory
     public function configure():self
     {
         return $this->afterCreating(function (Freight $freight) {
-            $freight->products_price = $freight->order->price;
+            $freight->products_price = $freight->order->total;
             $freight->save();
         });
     }

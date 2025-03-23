@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\MapController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Livewire\Address\CreateAddress;
 use App\Livewire\Admin\Frete\GenerateFrete;
 use App\Livewire\Admin\Orders\ListOrders;
 use App\Livewire\Admin\Orders\ShowOrder;
@@ -43,4 +45,8 @@ Route::get('/orders', ListOrders::class)->middleware([AdminMiddleware::class,'au
 Route::get('/orders/{order}', ShowOrder::class)->middleware([AdminMiddleware::class,'auth'])->name('orders.show.admin');
 Route::get('/orders/{order}/frete', GenerateFrete::class)->middleware([AdminMiddleware::class,'auth'])->name('frete.create.admin');
 
+Route::get('/freight/{freight}/map',[MapController::class,'show'])->name('freight.map');
+Route::post('generate-map/{freight}',[MapController::class,'generateRoute'])->name('generate.map.admin');
+
+Route::get('/address', CreateAddress::class)->middleware('auth')->name('address.store');
 require __DIR__.'/auth.php';

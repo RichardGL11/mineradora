@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->user_type === UserType::ADMIN;
     }
+
+    public function address():HasMany
+    {
+        return $this->hasMany(Address::class);
+    }
 }
