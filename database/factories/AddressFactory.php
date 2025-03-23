@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,14 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+                'user_id'    => User::factory(),
+                'CEP'        => '09070400',
+                'neighborhood' => $this->faker->city(),
+                'street'     => $this->faker->streetName(),
+                'number'     => $this->faker->buildingNumber(),
+                'city'       => $this->faker->city(),
+                'state'      => 'MG',
+                'complement' => 'casa 1',
         ];
     }
 }

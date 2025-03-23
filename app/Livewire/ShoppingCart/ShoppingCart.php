@@ -3,10 +3,12 @@
 namespace App\Livewire\ShoppingCart;
 
 use App\Console\Commands\GeneratePaymentCommand;
+use App\Models\Order;
 use App\Models\Product;
 use App\Services\PaymentGateway\Facades\AbacatePayFacade;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -65,19 +67,24 @@ class ShoppingCart extends Component
 
     public function createOrder()
     {
+        $response = Gate::inspect('create',Order::class);
+        if ($response->allowed()) {
+            $products =  collect($this->shoppingCart)->map(function ($item){
+                return new Product([
+                    'id' => $item['id'],
+                    'name' => $item['name'],
+                    'price' => $item['price'],
+                    'photo' => $item['photo'],
+                    'description' => $item['description'],
+                    'quantity' => $item['quantity'],
+                ]);
+            });
 
-       $products =  collect($this->shoppingCart)->map(function ($item){
-           return new Product([
-               'id' => $item['id'],
-               'name' => $item['name'],
-               'price' => $item['price'],
-               'photo' => $item['photo'],
-               'description' => $item['description'],
-               'quantity' => $item['quantity'],
-           ]);
-        });
+            app(GeneratePaymentCommand::class)->handle($products);
+        } else {
+            echo $response->message();
+        }
 
-        app(GeneratePaymentCommand::class)->handle($products);
     }
 
     #[Layout('layouts.app')]

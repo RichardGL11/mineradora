@@ -46,7 +46,7 @@
         const originInput = document.getElementById("origin").value;
         const destinationInput = document.getElementById("destination").value;
 
-        fetch('/generate-map', {
+        fetch('/generate-map/{{$freight}}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
