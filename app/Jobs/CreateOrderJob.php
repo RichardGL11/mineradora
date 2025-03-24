@@ -2,13 +2,12 @@
 
 namespace App\Jobs;
 
-use App\Actions\CreateOrderAction;
+use App\Actions\Order\CreateOrderAction;
 use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class CreateOrderJob implements ShouldQueue
 {

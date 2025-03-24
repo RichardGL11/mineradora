@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions;
+namespace App\Actions\Freight;
 
 use App\Enums\FreightStatus;
 use App\Models\Freight;

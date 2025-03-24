@@ -2,12 +2,10 @@
 
 namespace App\Livewire\Admin\Frete;
 
-use App\Actions\CreateFreightAction;
+use App\Actions\Freight\CreateFreightAction;
 use App\Console\Commands\GenerateFreteCommand;
 use App\Models\Order;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
