@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -20,7 +21,13 @@ class GenerateFrete extends Component
 
     public function generateFrete():void
     {
-        $fretes = app(GenerateFreteCommand::class)->handle($this->order->products,$this->order->user);
+        $cacheKey = 'fretes_' . $this->order->id;
+        $fretes= Cache::get($cacheKey);
+
+        if (!$fretes) {
+            $fretes = app(GenerateFreteCommand::class)->handle($this->order->products,$this->order->user);
+            Cache::forever($cacheKey, $fretes);
+        }
         $this->fretes = $fretes;
         $this->dispatch('reload');
     }

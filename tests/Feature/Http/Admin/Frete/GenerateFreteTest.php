@@ -3,12 +3,14 @@
 use App\Enums\FreightStatus;
 use App\Livewire\Admin\Frete\GenerateFrete;
 use App\Models\Freight;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 use App\Models\Order;
 use App\Models\Product;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
+use function PHPUnit\Framework\assertTrue;
 
 beforeEach(function () {
     Http::fake([
@@ -81,7 +83,6 @@ it('should see the freight options',function (){
     $livewire->assertSee('Loggi Ponto');
     $livewire->assertSee('Price R$:180.86');
     $livewire->assertSee('Price With Discount R$:0.00');
-
 });
 
 it('should be able to create a Freight for a Order', function () {
@@ -110,5 +111,24 @@ it('should be able to create a Freight for a Order', function () {
         'price'          => '180.86',
         'products_price' =>$order->total
     ]);
+});
+
+test('assert data is cached', function () {
+    $order =  Order::factory()
+        ->hasAttached(
+            Product::factory()->count(5),
+            ['quantity' => rand(1,20),]
+        )
+        ->create();
+    $livewire = Livewire::actingAs(\App\Models\User::factory()->admin()->create())
+        ->test(GenerateFrete::class, ['order' => $order])
+        ->call('generateFrete');
+
+    $livewire->assertSee('Loggi Ponto');
+    $livewire->assertSee('Price R$:180.86');
+    $livewire->assertSee('Price With Discount R$:0.00');
+    $livewire->refresh();
+    $cacheKey = 'fretes_' . $order->id;
+    assertTrue(Cache::has($cacheKey));
 });
 
