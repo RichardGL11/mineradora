@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Enums\OrderStatus;
+use App\Models\Address;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,5 +25,12 @@ class OrderFactory extends Factory
             'status'  => $this->faker->randomElement(OrderStatus::cases()),
             'total'   => $this->faker->randomFloat(2, 10, 100),
         ];
+    }
+
+    public function configure():self
+    {
+        return $this->afterCreating(function (Order $order) {
+            Address::factory()->for($order->user)->create();
+        });
     }
 }

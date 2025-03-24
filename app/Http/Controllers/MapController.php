@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Freight;
 use App\Services\Maps\GoogleMapsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MapController extends Controller
 {
@@ -14,10 +16,9 @@ class MapController extends Controller
 
     public function generateRoute(Request $request): JsonResponse
     {
-        $origin ='Fatec São Caetano do Sul';
-        $destination = $request->input('destination');
-
-       return  $this->googleMapsService->generateRoute($origin, $destination);
+        $origin = env('originCEP');
+        $address = Address::where('user_id','=', (int) $request->input('to'))->first();
+       return  $this->googleMapsService->generateRoute((string)$origin,$address->CEP);
     }
 
     public function show(Freight $freight)

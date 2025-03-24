@@ -14,10 +14,6 @@
 <h1>Rota de Carro</h1>
 
 <div id="controls">
-    <label for="origin">Origem (Latitude, Longitude):</label><br>
-    <input type="text" id="origin" placeholder="Ex: 37.419734,-122.0827784"><br><br>
-    <label for="destination">Destino (Latitude, Longitude):</label><br>
-    <input type="text" id="destination" placeholder="Ex: 37.417670,-122.079595"><br><br>
     <button onclick="computeRoute()">Calcular Rota</button>
 </div>
 
@@ -43,9 +39,7 @@
     }
 
     function computeRoute() {
-        const originInput = document.getElementById("origin").value;
-        const destinationInput = document.getElementById("destination").value;
-
+        const to = {{$freight->user->id}}
         fetch('/generate-map/{{$freight}}', {
             method: 'POST',
             headers: {
@@ -53,9 +47,8 @@
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             },
             body: JSON.stringify({
-                origin: originInput,
-                destination: destinationInput,
-            }),
+                to: to,
+              }),
         })
             .then(response => response.json())
             .then(data => {

@@ -18,6 +18,7 @@ class ShoppingCart extends Component
 {
     public bool $show = false;
     public array $shoppingCart = [];
+    public ?string $message = null;
 
     public function mount():void
     {
@@ -82,7 +83,8 @@ class ShoppingCart extends Component
 
             app(GeneratePaymentCommand::class)->handle($products);
         } else {
-            echo $response->message();
+            $this->message = $response->message();
+            return $response->message();
         }
 
     }

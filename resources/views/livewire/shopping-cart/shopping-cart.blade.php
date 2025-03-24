@@ -87,6 +87,9 @@
         </div>
     </section>
 </div>
+     @if($this->message)
+       <p>{{$message}}</p>
+      @endif
 @endif
  </div>
 

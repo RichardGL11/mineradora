@@ -20,7 +20,7 @@ class GenerateFrete extends Component
 
     public function generateFrete():void
     {
-        $fretes = app(GenerateFreteCommand::class)->handle($this->order->products);
+        $fretes = app(GenerateFreteCommand::class)->handle($this->order->products,$this->order->user);
         $this->fretes = $fretes;
         $this->dispatch('reload');
     }

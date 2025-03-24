@@ -5,6 +5,7 @@ namespace App\Services\Maps;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class GoogleMapsService
 {
@@ -28,6 +29,7 @@ class GoogleMapsService
             $data = $response->json();
             return response()->json($data);
         }
+        Log::info($response);
         return response()->json(['error' => 'Erro ao obter a rota'], 500);
     }
 

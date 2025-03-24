@@ -43,7 +43,7 @@ Route::get('/my-orders/{order}', \App\Livewire\Orders\ListOrders::class)
 
 Route::get('/orders', ListOrders::class)->middleware([AdminMiddleware::class,'auth'])->name('orders.list.admin');
 Route::get('/orders/{order}', ShowOrder::class)->middleware([AdminMiddleware::class,'auth'])->name('orders.show.admin');
-Route::get('/orders/{order}/frete', GenerateFrete::class)->middleware([AdminMiddleware::class,'auth'])->name('frete.create.admin');
+Route::get('/orders/{order}/freight', GenerateFrete::class)->middleware([AdminMiddleware::class,'auth'])->name('frete.create.admin');
 
 Route::get('/freight/{freight}/map',[MapController::class,'show'])->name('freight.map');
 Route::post('generate-map/{freight}',[MapController::class,'generateRoute'])->name('generate.map.admin');
