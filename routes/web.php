@@ -45,7 +45,7 @@ Route::get('/orders', ListOrders::class)->middleware([AdminMiddleware::class,'au
 Route::get('/orders/{order}', ShowOrder::class)->middleware([AdminMiddleware::class,'auth'])->name('orders.show.admin');
 Route::get('/orders/{order}/freight', GenerateFrete::class)->middleware([AdminMiddleware::class,'auth'])->name('frete.create.admin');
 
-Route::get('/freight/{freight}/map',[MapController::class,'show'])->name('freight.map');
+Route::get('/freight/{freight}/map',[MapController::class,'show'])->middleware('auth')->name('freight.map');
 Route::post('generate-map/{freight}',[MapController::class,'generateRoute'])->name('generate.map.admin');
 
 Route::get('/address', CreateAddress::class)->middleware('auth')->name('address.store');

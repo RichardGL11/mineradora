@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\User::class,'user_id');
             $table->foreignIdFor(\App\Models\Order::class,'order_id');
+            $table->foreignIdFor(\App\Models\User::class ,'driver_id')->nullable();
             $table->decimal('price');
             $table->decimal('products_price');
             $table->string('status');

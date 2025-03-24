@@ -19,6 +19,11 @@ class Freight extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function driver():BelongsTo
+    {
+        return $this->belongsTo(User::class,'driver_id');
+    }
+
     public function order():BelongsTo
     {
         return $this->belongsTo(Order::class,'order_id');
