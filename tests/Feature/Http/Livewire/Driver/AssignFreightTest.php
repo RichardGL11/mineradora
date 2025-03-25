@@ -20,3 +20,22 @@ test('a Driver can take a Freight', function () {
     $freight->refresh();
     expect($freight->driver->id)->toBe($driver->id);
 });
+
+test('after a driver was assigned to the freight, nobody cant see the accept button anymore', function () {
+    $driver = \App\Models\User::factory()->create(['user_type' => \App\Enums\UserType::DRIVER]);
+    $freight = Freight::factory()->create();
+    actingAs($driver);
+    from(route('freight.map',$freight))
+        ->post(route('accept.freight',$freight))
+        ->assertRedirect(route('freights.driver'));
+
+    assertDatabaseHas(Freight::class, [
+        'order_id' => $freight->order_id,
+        'driver_id'=> $driver->id,
+    ]);
+    $freight->refresh();
+    expect($freight->driver->id)->toBe($driver->id);
+
+  $freightMap = \Pest\Laravel\get(route('freight.map',$freight));
+  $freightMap->assertDontSee('Accept Freight');
+});
