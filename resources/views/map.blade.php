@@ -13,8 +13,13 @@
     </style>
 <h1>Rota de Carro</h1>
 
-<div id="controls">
-    <button onclick="computeRoute()">Calcular Rota</button>
+<div id="controls" class="flex items-end justify-between px-4 py-2 bg-gray-900">
+    <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none" onclick="computeRoute()">Calcular Rota</button>
+    @if(auth()->user()->isDriver() === true and is_null($freight->driver_id))
+            <a href="{{route('accept.freight',$freight)}}">
+            <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Accept Freight</button>
+            </a>
+    @endif
 </div>
 
 <div id="map"></div>

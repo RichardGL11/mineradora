@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        Freight::factory()->createOne();
+        Freight::factory(30)->create();
 
         $this->call([
            ProductSeeder::class,

@@ -61,6 +61,10 @@ class User extends Authenticatable
     {
         return $this->user_type === UserType::ADMIN;
     }
+    public function isDriver():bool
+    {
+        return $this->user_type === UserType::DRIVER;
+    }
 
     public function address():HasMany
     {
