@@ -3,6 +3,7 @@
 use App\Models\Freight;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\from;
 
 test('a Driver can take a Freight', function () {
@@ -38,4 +39,18 @@ test('after a driver was assigned to the freight, nobody cant see the accept but
 
   $freightMap = \Pest\Laravel\get(route('freight.map',$freight));
   $freightMap->assertDontSee('Accept Freight');
+});
+test('if a driver has an active freight he cannot accept another one ', function () {
+    $driver = \App\Models\User::factory()->create(['user_type' => \App\Enums\UserType::DRIVER]);
+    $freight = Freight::factory()->create();
+    actingAs($driver);
+    from(route('freight.map',$freight))
+        ->post(route('accept.freight',$freight))
+        ->assertRedirect(route('freights.driver'));
+
+    assertDatabaseMissing(Freight::class, [
+        'order_id' => $freight->order_id,
+        'driver_id'=> $driver->id,
+    ]);
+    expect($freight->driver)->toBeNull();
 });
