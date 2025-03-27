@@ -3,12 +3,12 @@ Descrição do Projeto:
    Desenvolver um aplicativo para gerenciar tanto a venda de produtos da A S.OS Areia e Brita quanto a logística de entrega, conectando clientes, administrador da plataforma e caçambeiros. O sistema permitirá que os clientes realizem pedidos diretamente no app, o administrador gere solicitações de frete, e os caçambeiros aceitem e realizem as entregas. O sistema contará com geolocalização para exibição da rota do frete e integração com meios de pagamento para processamento das compras e resgates de créditos.
 
 2. Fluxo Operacional
-   2.1 O cliente da mineradora seleciona e compra um produto diretamente pelo aplicativo.
-   2.2 O pagamento é processado pelo sistema através das integrações disponíveis.
-   2.3 O administrador da plataforma recebe a solicitação de compra e gera um frete vinculado ao pedido.
-   2.4 O sistema disponibiliza o frete para os caçambeiros cadastrados, que podem aceitar ou recusar.
-   2.5 O primeiro caçambeiro a aceitar fica responsável pela entrega.
-   2.6 O sistema exibe a rota da entrega via geolocalização, informando ao caçambeiro e ao cliente o status do transporte.
+   2.1 O cliente da mineradora seleciona e compra um produto diretamente pelo aplicativo. (feito)
+   2.2 O pagamento é processado pelo sistema através das integrações disponíveis. (feito)
+   2.3 O administrador da plataforma recebe a solicitação de compra e gera um frete vinculado ao pedido. (feito)
+   2.4 O sistema disponibiliza o frete para os caçambeiros cadastrados, que podem aceitar ou recusar.(feito)
+   2.5 O primeiro caçambeiro a aceitar fica responsável pela entrega. (feito)
+   2.6 O sistema exibe a rota da entrega via geolocalização, informando ao caçambeiro e ao cliente o status do transporte.(feito)
    2.7 A entrega é realizada, e o caçambeiro confirma a finalização da corrida.
    2.8 Após a entrega, o caçambeiro recebe um crédito na plataforma.
    2.9 O crédito pode ser utilizado de duas formas:

@@ -17,7 +17,7 @@ class AcceptFreightAction
                     ->where(function ($query) use ($driver) {
                              $query->where('driver_id','=',$driver->id);
                     })->count();
-        if($ActiveFreights == 0)return;
+        if($ActiveFreights != 0)return;
 
         DB::transaction(function () use ($freight,$driver){
             $freight->driver_id = $driver->id;

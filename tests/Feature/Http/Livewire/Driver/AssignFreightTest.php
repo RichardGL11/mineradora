@@ -11,7 +11,7 @@ test('a Driver can take a Freight', function () {
     $freight = Freight::factory()->create();
     actingAs($driver);
     from(route('freight.map',$freight))
-    ->post(route('accept.freight',$freight))
+    ->get(route('accept.freight',$freight))
     ->assertRedirect(route('freights.driver'));
 
     assertDatabaseHas(Freight::class, [
@@ -27,7 +27,7 @@ test('after a driver was assigned to the freight, nobody cant see the accept but
     $freight = Freight::factory()->create();
     actingAs($driver);
     from(route('freight.map',$freight))
-        ->post(route('accept.freight',$freight))
+        ->get(route('accept.freight',$freight))
         ->assertRedirect(route('freights.driver'));
 
     assertDatabaseHas(Freight::class, [
@@ -42,10 +42,11 @@ test('after a driver was assigned to the freight, nobody cant see the accept but
 });
 test('if a driver has an active freight he cannot accept another one ', function () {
     $driver = \App\Models\User::factory()->create(['user_type' => \App\Enums\UserType::DRIVER]);
-    $freight = Freight::factory()->create();
+    $Activefreight = Freight::factory()->create(['driver_id' => $driver->id]);
+    $freight  = Freight::factory()->create();
     actingAs($driver);
     from(route('freight.map',$freight))
-        ->post(route('accept.freight',$freight))
+        ->get(route('accept.freight',$freight))
         ->assertRedirect(route('freights.driver'));
 
     assertDatabaseMissing(Freight::class, [

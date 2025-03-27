@@ -58,6 +58,6 @@ Route::get('/address', CreateAddress::class)->middleware('auth')->name('address.
 Route::get('driver', CreateDriver::class)->name('create.driver');
 
 Route::get('freights', ListFreight::class)->middleware(DriverMiddleware::class)->name('freights.list');
-Route::post('accept-freight/{freight}', AcceptFreigth::class)->middleware(DriverMiddleware::class)->name('accept.freight');
+Route::get('accept-freight/{freight}', AcceptFreigth::class)->middleware(DriverMiddleware::class)->name('accept.freight');
 Route::get('freights-driver', ListDriverFreigths::class)->middleware(DriverMiddleware::class)->name('freights.driver');
 require __DIR__.'/auth.php';
