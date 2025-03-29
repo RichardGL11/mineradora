@@ -3,6 +3,7 @@
 use App\Http\Controllers\Driver\AcceptFreigth;
 use App\Http\Controllers\Driver\FinishFreightController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\Order\ConfirmDeliveredController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\DriverMiddleware;
 use App\Livewire\Address\CreateAddress;
@@ -62,4 +63,6 @@ Route::get('freights', ListFreight::class)->middleware(DriverMiddleware::class,'
 Route::get('accept-freight/{freight}', AcceptFreigth::class)->middleware(DriverMiddleware::class,'auth')->name('accept.freight');
 Route::get('freights-driver', ListDriverFreigths::class)->middleware(DriverMiddleware::class,'auth')->name('freights.driver');
 Route::get('finish-freight/{freight}', FinishFreightController::class)->middleware(DriverMiddleware::class,'auth')->name('freights.driver.finish');
+
+Route::get('finish-freight/confirmation/{freight}', ConfirmDeliveredController::class)->middleware('auth')->name('freights.finish.confirmation');
 require __DIR__.'/auth.php';

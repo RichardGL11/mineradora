@@ -32,7 +32,7 @@ class OrderDelivered extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->line('Your Order Has Been Delivered')
-                    ->action('Notification Action', url('/'))
+                    ->action('Confirm that you received ', url(route('freights.finish.confirmation',$this->freight)))
                     ->subject("Order number: {$this->freight->order->id}")
                     ->line('Thank you for using our application!');
     }
