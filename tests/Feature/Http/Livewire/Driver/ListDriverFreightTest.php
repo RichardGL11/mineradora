@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Freight\ListDriverFreigths;
+use App\Livewire\Driver\ListDriverFreigths;
 use App\Models\Freight;
 use Livewire\Livewire;
 

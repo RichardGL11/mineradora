@@ -20,6 +20,12 @@
             <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Accept Freight</button>
             </a>
     @endif
+
+    @if($freight->driver_id === auth()->user()->id)
+        <a href="{{route('freights.driver.finish',$freight)}}">
+            <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Mark as Done</button>
+        </a>
+    @endif
 </div>
 
 <div id="map"></div>

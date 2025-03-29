@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Driver\AcceptFreigth;
+use App\Http\Controllers\Driver\FinishFreightController;
 use App\Http\Controllers\MapController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\DriverMiddleware;
@@ -9,7 +10,7 @@ use App\Livewire\Admin\Frete\GenerateFrete;
 use App\Livewire\Admin\Orders\ListOrders;
 use App\Livewire\Admin\Orders\ShowOrder;
 use App\Livewire\Driver\CreateDriver;
-use App\Livewire\Freight\ListDriverFreigths;
+use App\Livewire\Driver\ListDriverFreigths;
 use App\Livewire\Freight\ListFreight;
 use App\Livewire\ShoppingCart\ShoppingCart;
 use Illuminate\Support\Facades\Route;
@@ -60,4 +61,5 @@ Route::get('driver', CreateDriver::class)->name('create.driver');
 Route::get('freights', ListFreight::class)->middleware(DriverMiddleware::class,'auth')->name('freights.list');
 Route::get('accept-freight/{freight}', AcceptFreigth::class)->middleware(DriverMiddleware::class,'auth')->name('accept.freight');
 Route::get('freights-driver', ListDriverFreigths::class)->middleware(DriverMiddleware::class,'auth')->name('freights.driver');
+Route::get('finish-freight/{freight}', FinishFreightController::class)->middleware(DriverMiddleware::class,'auth')->name('freights.driver.finish');
 require __DIR__.'/auth.php';

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Freight;
+namespace App\Livewire\Driver;
 
 use App\Models\Freight;
 use Illuminate\Support\Collection;
