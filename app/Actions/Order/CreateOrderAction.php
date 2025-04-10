@@ -12,7 +12,7 @@ class CreateOrderAction
     public static function execute(Collection|Product $products, int $amount, string $id,string|int $user_id)
     {
         $order = Order::query()->create([
-            'id' =>   $id,
+            'external_id' =>   $id,
             'user_id' => $user_id,
             'status' => OrderStatus::PENDING->value,
             'total' => $amount

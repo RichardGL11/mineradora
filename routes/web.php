@@ -4,6 +4,7 @@ use App\Http\Controllers\Driver\AcceptFreigth;
 use App\Http\Controllers\Driver\FinishFreightController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\Order\ConfirmDeliveredController;
+use App\Http\Controllers\UpdateOrderStatusController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\DriverMiddleware;
 use App\Livewire\Address\CreateAddress;
@@ -14,6 +15,7 @@ use App\Livewire\Driver\CreateDriver;
 use App\Livewire\Driver\ListDriverFreigths;
 use App\Livewire\Freight\ListFreight;
 use App\Livewire\ShoppingCart\ShoppingCart;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -38,6 +40,7 @@ Route::get('/deucerto',ShoppingCart::class)
     ->middleware(['auth'])
     ->name('deucerto');
 
+Route::post('/deu-certo', UpdateOrderStatusController::class)->withoutMiddleware(VerifyCsrfToken::class)->name('webhook');
 
 Route::get('/my-orders', \App\Livewire\Orders\ListOrders::class)
     ->middleware(['auth'])

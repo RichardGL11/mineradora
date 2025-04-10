@@ -80,7 +80,7 @@ class ShoppingCart extends Component
                     'quantity' => $item['quantity'],
                 ]);
             });
-
+            Session::forget('shoppingCart_'. Auth::id());
             app(GeneratePaymentCommand::class)->handle($products);
         } else {
             $this->message = $response->message();

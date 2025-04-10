@@ -16,7 +16,7 @@ class Order extends Model
     use HasFactory;
     use HasUuids;
 
-    protected $fillable = ['user_id','id','total','status'];
+    protected $fillable = ['user_id','id','total','status','external_id'];
     protected $casts = ['status' => OrderStatus::class];
 
     public function user():BelongsTo

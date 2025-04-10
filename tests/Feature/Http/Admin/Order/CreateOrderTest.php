@@ -44,6 +44,7 @@ it('should be able to create an order', function () {
     assertDatabaseCount(Order::class, 1);
     assertDatabaseHas(Order::class, [
        'user_id' => Auth::id(),
+       'external_id' => 'bill_6xEyXSA5aKk23XkZrYNPyTze',
        'status'  => OrderStatus::PENDING->value,
        'total'   =>  480663
     ]);
@@ -53,7 +54,6 @@ it('should be able to create an order', function () {
     $product->each(function ($product) {
         assertDatabaseHas('order_product',[
             'product_id' => $product->id,
-            'order_id'   => 'bill_6xEyXSA5aKk23XkZrYNPyTze',
             'quantity'   => $product->quantity
         ]);
     });

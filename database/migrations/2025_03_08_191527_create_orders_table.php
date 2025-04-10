@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignIdFor(User::class,'user_id')->constrained();
             $table->string('status');
+            $table->string('external_id')->unique()->nullable();
             $table->decimal('total',10,2);
             $table->timestamps();
         });

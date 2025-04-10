@@ -41,6 +41,15 @@ new class extends Component
                             <livewire:shopping-cart.shopping-cart />
                         @endif
                     </x-nav-link>
+                    @if(auth()->user()->isAdmin())
+                    <x-nav-link :href="route('orders.list.admin')" :active="request()->routeIs('orders.list.admin')" wire:navigate>
+                        {{ __('Orders') }}
+                    </x-nav-link>
+                        <x-nav-link :href="route('freights.list')" :active="request()->routeIs('freights.list')" wire:navigate>
+                            {{ __('Freights') }}
+                        </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 
