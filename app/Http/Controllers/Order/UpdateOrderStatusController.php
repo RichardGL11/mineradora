@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\UpdateOrderStatusJob;
@@ -12,7 +12,7 @@ class UpdateOrderStatusController extends Controller
     public function __invoke(Request $request):void
     {
         $array = json_decode($request->getContent(),true);
-        $order = Order::query()->where('id', $array['data']['billing']['id'])->firstOrFail();
+        $order = Order::query()->where('external_id', $array['data']['billing']['id'])->firstOrFail();
         UpdateOrderStatusJob::dispatch($order);
     }
 }
