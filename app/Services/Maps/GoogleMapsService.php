@@ -29,7 +29,6 @@ class GoogleMapsService
             $data = $response->json();
             return response()->json($data);
         }
-        Log::info($response);
         return response()->json(['error' => 'Erro ao obter a rota'], 500);
     }
 
