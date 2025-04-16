@@ -75,7 +75,11 @@ new class extends Component
                         <x-dropdown-link :href="route('address.store')" wire:navigate>
                             {{ __('Address') }}
                         </x-dropdown-link>
-
+                        @if(auth()->user()->user_type->value == \App\Enums\UserType::DRIVER->value)
+                        <x-dropdown-link :href="route('wallet')" wire:navigate>
+                            {{ __('Wallet') }}
+                        </x-dropdown-link>
+                        @endif
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>

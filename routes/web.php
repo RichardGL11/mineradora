@@ -41,7 +41,10 @@ Route::get('/deucerto',ShoppingCart::class)
     ->name('deucerto');
 
 Route::post('/deu-certo', UpdateOrderStatusController::class)->withoutMiddleware(VerifyCsrfToken::class)->name('webhook');
+Route::post('/asaas/webhook', \App\Http\Controllers\Transaction\CreateTransactionController::class)->withoutMiddleware(VerifyCsrfToken::class)->name('webhook.asaas');
 
+
+Route::get('/wallet', \App\Livewire\Driver\RequestPayment::class)->middleware('auth',DriverMiddleware::class)->name('wallet');
 Route::get('/my-orders', \App\Livewire\Orders\ListOrders::class)
     ->middleware(['auth'])
     ->name('list.my.orders');
