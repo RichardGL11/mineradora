@@ -26,11 +26,4 @@ class OrderFactory extends Factory
             'total'   => $this->faker->randomFloat(2, 10, 100),
         ];
     }
-
-    public function configure():self
-    {
-        return $this->afterCreating(function (Order $order) {
-            Address::factory()->for($order->user)->create();
-        });
-    }
 }

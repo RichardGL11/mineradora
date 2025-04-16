@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Enums\UserType;
+use App\Models\Address;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -61,5 +63,11 @@ class UserFactory extends Factory
     {
         $this->fakerBr = \Faker\Factory::create('pt_br');
         return $this->fakerBr->phoneNumber();
+    }
+    public function configure(): self
+    {
+        return $this->afterCreating(function (User $user) {
+            Address::factory()->for($user)->create();
+        });
     }
 }
