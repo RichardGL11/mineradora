@@ -3,13 +3,14 @@
 namespace Database\Factories;
 
 use App\Enums\FreightStatus;
+use App\Models\Address;
 use App\Models\Freight;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Freight>
+ * @extends Factory<Freight>
  */
 class FreightFactory extends Factory
 {
@@ -34,6 +35,9 @@ class FreightFactory extends Factory
         return $this->afterCreating(function (Freight $freight) {
             $freight->products_price = $freight->order->total;
             $freight->save();
+
+             Address::factory()->for($freight->user)->create();
         });
+
     }
 }
