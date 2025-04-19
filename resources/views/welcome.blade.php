@@ -15,7 +15,7 @@
     <header class="bg-white shadow-md fixed w-full z-10">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <span class="text-primary text-2xl font-bold">MineralTech</span>
+                <span class="text-#1E3A8A text-2xl font-bold">MineralTech</span>
             </div>
             <nav class="hidden md:flex space-x-8">
                 @if (Route::has('login'))
@@ -216,7 +216,9 @@
                     </div>
                     <p class="text-gray-600 mb-4">"A qualidade dos minerais fornecidos pela MineralTech superou nossas expectativas. Nossa produção melhorou significativamente."</p>
                     <div class="flex items-center">
-                        <img src="/placeholder.svg?height=50&width=50" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-9">
+                            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                        </svg>
                         <div>
                             <h4 class="font-bold">Carlos Silva</h4>
                             <p class="text-sm text-gray-500">Diretor Industrial, Aço Brasil</p>
@@ -247,7 +249,9 @@
                     </div>
                     <p class="text-gray-600 mb-4">"Parceria de longo prazo que tem nos proporcionado segurança e confiabilidade no fornecimento de matérias-primas essenciais."</p>
                     <div class="flex items-center">
-                        <img src="/placeholder.svg?height=50&width=50" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-9">
+                            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                        </svg>
                         <div>
                             <h4 class="font-bold">Ana Ferreira</h4>
                             <p class="text-sm text-gray-500">Gerente de Compras, Construtora Horizonte</p>
@@ -278,7 +282,10 @@
                     </div>
                     <p class="text-gray-600 mb-4">"O compromisso com a sustentabilidade da MineralTech foi fundamental para nossa decisão de estabelecer esta parceria."</p>
                     <div class="flex items-center">
-                        <img src="/placeholder.svg?height=50&width=50" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-9">
+                            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                        </svg>
+
                         <div>
                             <h4 class="font-bold">Roberto Mendes</h4>
                             <p class="text-sm text-gray-500">CEO, EcoMinerais</p>
