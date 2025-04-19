@@ -11,26 +11,107 @@
 
 
     </style>
-<h1>Rota de Carro</h1>
+    <main class="container mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-<div id="controls" class="flex items-end justify-between px-4 py-2 bg-gray-900">
-    <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none" onclick="computeRoute()">Calcular Rota</button>
-    @if(auth()->user()->isDriver() === true and is_null($freight->driver_id))
-            <a href="{{route('accept.freight',$freight)}}">
-            <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Accept Freight</button>
-            </a>
-    @endif
+            <!-- Coluna 1: Informações de Contato -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Informações de Contato</h2>
+                    <div class="space-y-4">
 
-    @if($freight->driver_id === auth()->user()->id)
-        <a href="{{route('freights.driver.finish',$freight)}}">
-            <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Mark as Done</button>
-        </a>
-    @endif
-</div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-800 rounded-full p-2 mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800">Endereço</h3>
+                                <p class="text-gray-600">
+                                   {{$freight->user->address->first()->street}}<br>
+                                    {{$freight->user->address->first()->neighborhood}}<br>
+                                    {{$freight->user->address->first()->city}} - {{$freight->user->address->first()->state}}<br>
+                                    CEP: {{$freight->user->address->first()->CEP}}
+                                </p>
+                            </div>
+                        </div>
 
-<div id="map"></div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-800 rounded-full p-2 mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800">Telefone</h3>
+                                <p class="text-gray-600">{{$freight->user->phone}}</p>
+                            </div>
+                        </div>
 
-<script>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-800 rounded-full p-2 mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800">E-mail</h3>
+                                <p class="text-gray-600">{{$freight->user->email}}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Como Chegar + Controles -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+
+                    <div class="p-6 border-b border-gray-200">
+                        <h2 class="text-2xl font-bold text-gray-800">Como Chegar</h2>
+                    </div>
+
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Calcule sua Rota</h3>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="md:self-end">
+                                <button onclick="computeRoute()" id="calcular-rota" class="w-full bg-accent bg-amber-600 text-white font-bold py-3 px-6 rounded-md transition duration-300 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                    </svg>
+                                    Calcular Rota
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                        @if(auth()->user()->isDriver() === true and is_null($freight->driver_id))
+                            <a href="{{route('accept.freight',$freight)}}">
+                                <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Accept Freight</button>
+                            </a>
+                        @endif
+
+                        @if($freight->driver_id === auth()->user()->id)
+                            <a href="{{route('freights.driver.finish',$freight)}}">
+                                <button class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Mark as Done</button>
+                            </a>
+                        @endif
+
+                    <div id="map"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+
+    <script>
     let map;
     let directionsRenderer;
     let directionsService;
