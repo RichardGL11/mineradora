@@ -1,57 +1,60 @@
-# Descrição do Projeto
+# 🪨 Mineradora – Gestão de Pedras, Areia e Brita
 
-## 1. Objetivo Geral
-Desenvolver um aplicativo para gerenciar tanto a venda de produtos da A S.OS Areia e Brita quanto a logística de entrega, conectando clientes, administrador da plataforma e caçambeiros. O sistema permitirá que os clientes realizem pedidos diretamente no app, o administrador gere solicitações de frete, e os caçambeiros aceitem e realizem as entregas. O sistema contará com geolocalização para exibição da rota do frete e integração com meios de pagamento para processamento das compras e resgates de créditos.
+Sistema web completo vendas, logística de uma mineradora. Voltado para facilitar o fluxo de trabalho entre clientes, administradores e caçambeiros, integrando comunicação, pagamentos e operações logísticas em um só lugar.
 
-## 2. Fluxo Operacional
+---
 
-### 2.1 Processo de Compra e Pagamento
-- O cliente da mineradora seleciona e compra um produto diretamente pelo aplicativo. (feito)
-- O pagamento é processado pelo sistema através das integrações disponíveis. (feito)
+## ✨ Features
 
-### 2.2 Processamento e Atribuição do Frete
-- O administrador da plataforma recebe a solicitação de compra e gera um frete vinculado ao pedido. (feito)
-- O sistema disponibiliza o frete para os caçambeiros cadastrados, que podem aceitar ou recusar. (feito)
-- O primeiro caçambeiro a aceitar fica responsável pela entrega. (feito)
+- 🛒 **Gestão de pedidos:** Clientes podem fazer pedidos de brita, areia e outros materiais facilmente.
+- 🛻 **Gestão de entregas:** Caçambeiros recebem notificações e atualizam status das entregas.
+- 💳 **Integração com gateways de pagamento:** Pagamentos online com Pix [AbacatePay / Asaas].
+- 📦 **Rota de Entrega:** Obtem a rota de entrega usando a API Routes do Google.
+- 📦 **Cotação de Fretes:** Administradores cotam o valor do frete usando a Api do Melhor Envio.
+- 🔄 **Webhooks integrados:** Processamento automático de callbacks de pagamento e atualização de status dos pedidos.
+- 🧪 **Cobertura de testes de 95%**: Segurança e confiança com testes automatizados em quase todo o código.
+- 🧠 **Autenticação e permissões:** Sistema robusto com múltiplos papéis: cliente, administrador e motorista.
+- 🌐 **Responsivo e moderno:** Interface com Tailwind CSS e Vite, adaptável para desktop e mobile.
 
-### 2.3 Geolocalização e Acompanhamento
-- O sistema exibe a rota da entrega via geolocalização, informando ao caçambeiro e ao cliente o status do transporte. (feito)
-- A entrega é realizada, e o caçambeiro confirma a finalização da corrida.
+---
 
-### 2.4 Créditos e Resgates
-- Após a entrega, o caçambeiro recebe um crédito na plataforma.
-- O crédito pode ser utilizado de duas formas:
-    - Compra de produtos na mineradora.
-    - Resgate financeiro via PIX, débito ou outra forma definida.
+## 🎥 Demonstração
 
-## 3. Entidades do Sistema
+## Página Inicial
+![Pagina_inicial](assets/pagina_incial.gif)
 
-- **Clientes**: Usuários que compram produtos e solicitam fretes.
-- **Caçambeiros**: Profissionais cadastrados para realizar entregas.
-- **Administrador**: Responsável por gerenciar pedidos e fretes.
-- **Produtos**: Itens vendidos pela mineradora dentro do aplicativo.
-- **Fretes**: Solicitações de transporte criadas automaticamente após a venda.
-- **Pagamentos**: Transações processadas dentro do app.
-- **Créditos**: Valores recebidos pelos caçambeiros pelas entregas realizadas.
+### 🛒 Criando um pedido | 💳 Pagando com gateway integrado
 
-## 4. Requisitos Funcionais
+![Criando pedido](assets/compra_carrinho.gif)
 
-### 4.1 Cadastro e Gerenciamento de Usuários
-- Clientes podem criar contas e realizar pedidos.
-- Caçambeiros podem se cadastrar para receber e aceitar fretes.
-- O sistema terá uma copy persuasiva para incentivar caçambeiros a realizarem o cadastro na tela inicial.
+### 
 
-### 4.2 Venda de Produtos
-- Listagem de produtos com preços e disponibilidade.
-- Opção de adicionar produtos ao carrinho e finalizar a compra.
-- Pagamento realizado diretamente pelo aplicativo.
 
-### 4.3 Gestão de Fretes
-- O administrador gera solicitações de frete vinculadas às compras.
-- Os caçambeiros recebem as solicitações e podem aceitar ou recusar.
-- O primeiro caçambeiro a aceitar garante o serviço.
-- O sistema exibe a rota da entrega via geolocalização, permitindo ao caçambeiro e ao cliente acompanhar o trajeto.
 
-### 4.4 Registro de Entrega
-- O sistema registra a entrega do produto.
-- O status da entrega é atualizado em tempo real no app.
+### 📦 Motorista vendo os detalhes da entrega
+
+![Entrega](assets/rota.gif)
+
+---
+
+## ⚙️ Instalação e Configuração
+
+```bash
+# Clonar o projeto
+git clone https://github.com/RichardGL11/mineradora.git
+cd mineradora
+
+# Instalar dependências
+composer install
+npm install
+
+# Copiar e configurar variáveis de ambiente
+cp .env.example .env
+php artisan key:generate
+
+# Rodar migrações e seeders
+php artisan migrate --seed
+
+# Rodar o sistema
+npm run dev
+php artisan serve
