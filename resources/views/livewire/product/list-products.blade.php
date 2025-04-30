@@ -29,4 +29,5 @@
     @empty
         <p>No Products</p>
     @endforelse
+    {{$this->products->links()}}
 </div>
